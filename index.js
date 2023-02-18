@@ -1,8 +1,10 @@
 const express = require('express');
-const cors = require('cors')
-const app = express();
 require('dotenv').config({ path: __dirname + '/.env' })
+const cors = require('cors')
+const authRoutes = require("./Routes/AuthRoutes")
+const app = express();
 const mongoose = require("mongoose")
+const cookieParser = require("cookie-parser")
 
 const PORT = process.env.PORT || 4111;
 
@@ -23,4 +25,6 @@ app.use(cors({
     credentials: "true"
 }))
 
+app.use(cookieParser())
 app.use(express.json());
+app.use("/", authRoutes)
