@@ -9,6 +9,21 @@ const createToken = (id) => {
     });
 }
 
+const handleErrors = (err) => {
+    let errors = { email: "", password: "" };
+    if (err.code === 11000) {
+        errors.email = "Email is already registered";
+        return errors;
+    }
+
+    if (err.message.includes("Users validation failed")) {
+        Object.values(err.errors).forEach(({ properties }) => {
+            errors[properties.path] = properties.message;
+        })
+    }
+    return errors;
+};
+
 module.exports.register = async (req, res, next) => {
     try {
         const { email, password } = req.body;
@@ -22,7 +37,8 @@ module.exports.register = async (req, res, next) => {
         });
         res.status(201).json({ user: user._id, created: true })
     } catch (err) {
-        console.log(err);
+        const errors = handleErrors(err);
+        res.json({ errors, created: false });
     }
 };
 
