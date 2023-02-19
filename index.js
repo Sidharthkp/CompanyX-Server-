@@ -22,7 +22,7 @@ mongoose.connect(process.env.MONGO_URL, {
 app.use(cors({
     origin: ["http://localhost:5173"],
     method: ["GET", "POST"],
-    credentials: "true"
+    credentials: true
 }))
 
 app.use(cookieParser())
