@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const maxAge = 3 * 24 * 60 * 60;
 
 const createToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET_KEY, {
+    return jwt.sign({ id }, process.env.REFRESH_TOKEN_SECRET, {
         expiresIn: maxAge
     });
 }
@@ -53,42 +53,68 @@ module.exports.login = async (req, res, next) => {
         if (secretCode) {
             if (secretCode === process.env.ADMIN_CODE) {
                 const user = await UserModel.login(email, password);
-                const check = await UserModel.findOne({ email });
-                const value = check.roles.some((x) => x === "admin");
-                if (!value) {
+                if (!user.roles) {
                     await UserModel.findOneAndUpdate({ email }, {
-                        $push: {
+                        $set: {
                             roles: "admin"
                         }
                     })
-                }
-                const token = createToken(user._id);
+                    const token = createToken(user._id);
 
-                res.cookie("jwt", token, {
-                    withCredentials: true,
-                    httpOnly: false,
-                    maxAge: maxAge * 1000,
-                });
-                res.status(201).json({ user: user._id, created: true })
+                    res.cookie("jwt", token, {
+                        withCredentials: true,
+                        httpOnly: false,
+                        maxAge: maxAge * 1000,
+                    });
+                    res.status(201).json({ user: user._id, role: user.roles, created: true })
+                } else {
+                    if (user.roles != "admin") {
+                        let errMessage = "You dont have permission to access the admin account"
+                        res.json({ errMessage, created: false });
+                    } else {
+
+                        const token = createToken(user._id);
+
+                        res.cookie("jwt", token, {
+                            withCredentials: true,
+                            httpOnly: false,
+                            maxAge: maxAge * 1000,
+                        });
+                        res.status(201).json({ user: user._id, role: user.roles, created: true })
+                    }
+                }
             } else if (secretCode === process.env.HR_CODE) {
                 const user = await UserModel.login(email, password);
-                const check = await UserModel.findOne({ email });
-                const value = check.roles.some((x) => x === "hr");
-                if (!value) {
+                if (!user.roles) {
                     await UserModel.findOneAndUpdate({ email }, {
-                        $push: {
+                        $set: {
                             roles: "hr"
                         }
                     })
-                }
-                const token = createToken(user._id);
+                    const token = createToken(user._id);
 
-                res.cookie("jwt", token, {
-                    withCredentials: true,
-                    httpOnly: false,
-                    maxAge: maxAge * 1000,
-                });
-                res.status(201).json({ user: user._id, created: true })
+                    res.cookie("jwt", token, {
+                        withCredentials: true,
+                        httpOnly: false,
+                        maxAge: maxAge * 1000,
+                    });
+                    res.status(201).json({ user: user._id, role: user.roles, created: true })
+                } else {
+                    if (user.roles != "hr") {
+                        let errMessage = "You dont have permission to access the HR account"
+                        res.json({ errMessage, created: false });
+                    } else {
+
+                        const token = createToken(user._id);
+
+                        res.cookie("jwt", token, {
+                            withCredentials: true,
+                            httpOnly: false,
+                            maxAge: maxAge * 1000,
+                        });
+                        res.status(201).json({ user: user._id, role: user.roles, created: true })
+                    }
+                }
             } else {
                 let errMessage = "Wrong  secret code"
                 res.json({ errMessage, created: false });
