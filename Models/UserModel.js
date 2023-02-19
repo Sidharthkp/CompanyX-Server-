@@ -11,6 +11,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Password is required"],
     },
+    roles: {
+        type: [String],
+    }
 });
 
 userSchema.pre("save", async function (next) {
@@ -19,11 +22,11 @@ userSchema.pre("save", async function (next) {
     next();
 })
 
-userSchema.statics.login = async function(email, password) {
-    const user = await this.findOne({email});
-    if(user){
+userSchema.statics.login = async function (email, password) {
+    const user = await this.findOne({ email });
+    if (user) {
         const auth = await bcrypt.compare(password, user.password);
-        if(auth){
+        if (auth) {
             return user;
         }
         throw Error("Incorrect Password");
