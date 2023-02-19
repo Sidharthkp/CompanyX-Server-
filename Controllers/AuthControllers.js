@@ -51,7 +51,10 @@ module.exports.login = async (req, res, next) => {
     try {
         const { email, password, secretCode } = req.body;
         if (secretCode) {
-            if (secretCode === process.env.ADMIN_CODE) {
+            if (secretCode === "empty") {
+                let errMessage = "Secret key is mandatory"
+                res.json({ errMessage, created: false });
+            } else if (secretCode === process.env.ADMIN_CODE) {
                 const user = await UserModel.login(email, password);
                 if (!user.roles) {
                     await UserModel.findOneAndUpdate({ email }, {
@@ -120,15 +123,21 @@ module.exports.login = async (req, res, next) => {
                 res.json({ errMessage, created: false });
             }
         } else {
-            const user = await UserModel.login(email, password);
-            const token = createToken(user._id);
+            const check = await UserModel.findOne({ email })
+            if (!check.roles) {
+                const user = await UserModel.login(email, password);
+                const token = createToken(user._id);
 
-            res.cookie("jwt", token, {
-                withCredentials: true,
-                httpOnly: false,
-                maxAge: maxAge * 1000,
-            });
-            res.status(200).json({ user: user._id, created: true })
+                res.cookie("jwt", token, {
+                    withCredentials: true,
+                    httpOnly: false,
+                    maxAge: maxAge * 1000,
+                });
+                res.status(200).json({ user: user._id, created: true })
+            } else {
+                let errMessage = "Please login with HR/Admin login portal"
+                res.json({ errMessage, created: false });
+            }
         }
     } catch (err) {
         const errors = handleErrors(err);
