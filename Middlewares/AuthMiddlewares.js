@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken")
 module.exports.checkUser = (req, res, next) => {
     const token = req.cookies.jwt;
     if (token) {
-        jwt.verify(token, "jwttokenispassed", async (err, decodedToken) => {
+        jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, decodedToken) => {
             if (err) {
                 res.json({ status: false });
                 next()
