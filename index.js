@@ -2,6 +2,7 @@ const express = require('express');
 require('dotenv').config({ path: __dirname + '/.env' })
 const cors = require('cors')
 const authRoutes = require("./Routes/AuthRoutes")
+const hrRoutes = require("./Routes/HRRoutes")
 const app = express();
 const mongoose = require("mongoose")
 const cookieParser = require("cookie-parser")
@@ -28,3 +29,4 @@ app.use(cors({
 app.use(cookieParser())
 app.use(express.json());
 app.use("/", authRoutes)
+app.use("/hr", hrRoutes)
