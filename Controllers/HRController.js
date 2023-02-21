@@ -17,3 +17,25 @@ module.exports.userDetails = async (req, res) => {
         res.json({ errMessage: err.message });
     }
 }
+
+module.exports.userSalarySet = async (req, res) => {
+    try {
+        await UserModel.findByIdAndUpdate(req.body.id, {
+            $set: {
+                salaryStructure: {
+                    basic: req.body.basic,
+                    reimbursements: req.body.reimbursements,
+                    fixedAllowance: req.body.fixedAllowance,
+                    incomeTax: req.body.incomeTax,
+                    insurance: req.body.insurance,
+                    overTime: req.body.overTime,
+                    halfDay: req.body.halfDay,
+                    fullDay: req.body.fullDay,
+                    CTC: req.body.CTC
+                }
+            }
+        })
+    } catch (err) {
+        res.json({ errMessage: err.message });
+    }
+}
