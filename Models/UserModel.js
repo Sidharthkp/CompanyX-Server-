@@ -14,35 +14,40 @@ const userSchema = new mongoose.Schema({
     roles: {
         type: String,
     },
-    salaryStructure: {
-        basic: {
-            type: Number,
+    salaryStructure: [
+        {
+            basic: {
+                type: Number,
+            },
+            reimbursements: {
+                type: Number,
+            },
+            fixedAllowance: {
+                type: Number,
+            },
+            incomeTax: {
+                type: Number,
+            },
+            insurance: {
+                type: Number,
+            },
+            overTime: {
+                type: Number,
+            },
+            halfDay: {
+                type: Number,
+            },
+            fullDay: {
+                type: Number,
+            },
+            CTC: {
+                type: Number
+            },
+            timeStamps: {
+                type: Date
+            }
         },
-        reimbursements: {
-            type: Number,
-        },
-        fixedAllowance: {
-            type: Number,
-        },
-        incomeTax: {
-            type: Number,
-        },
-        insurance: {
-            type: Number,
-        },
-        overTime: {
-            type: Number,
-        },
-        halfDay: {
-            type: Number,
-        },
-        fullDay: {
-            type: Number,
-        },
-        CTC: {
-            type: Number
-        }
-    }
+    ]
 });
 
 userSchema.pre("save", async function (next) {

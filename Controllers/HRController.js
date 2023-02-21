@@ -21,7 +21,7 @@ module.exports.userDetails = async (req, res) => {
 module.exports.userSalarySet = async (req, res) => {
     try {
         await UserModel.findByIdAndUpdate(req.body.id, {
-            $set: {
+            $push: {
                 salaryStructure: {
                     basic: req.body.basic,
                     reimbursements: req.body.reimbursements,
@@ -31,7 +31,8 @@ module.exports.userSalarySet = async (req, res) => {
                     overTime: req.body.overTime,
                     halfDay: req.body.halfDay,
                     fullDay: req.body.fullDay,
-                    CTC: req.body.CTC
+                    CTC: req.body.CTC,
+                    timeStamps: new Date()
                 }
             }
         })
