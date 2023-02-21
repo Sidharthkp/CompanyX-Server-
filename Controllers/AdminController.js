@@ -71,3 +71,11 @@ module.exports.getBanner = async (req,res) => {
         res.json({errMessage: err.message});
     }
 }
+
+module.exports.deleteBanner = async (req,res) => {
+    try{
+        await BannerModel.findByIdAndRemove(req.body.id).then(() => res.status(201).json({data: "Deleted"})).catch(err => res.json(err))
+    }catch (err) {
+        res.json({errMessage: err.message});
+    }
+}
