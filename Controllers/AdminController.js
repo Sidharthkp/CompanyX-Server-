@@ -63,3 +63,11 @@ module.exports.postBanner = async (req, res) => {
         res.json({ errMessage: err.message });
     }
 }
+
+module.exports.getBanner = async (req,res) => {
+    try{
+        await BannerModel.find().then((data) => res.status(201).json(data)).catch(err => res.json(err))
+    }catch (err) {
+        res.json({errMessage: err.message});
+    }
+}
