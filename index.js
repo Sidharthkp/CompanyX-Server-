@@ -11,7 +11,7 @@ const cookieParser = require("cookie-parser")
 
 const PORT = process.env.PORT || 4111;
 
-app.listen(PORT, console.log("Server has started on port number: " + PORT))
+app.listen(PORT, console.log("Server has started"))
 
 mongoose.set('strictQuery', true);
 mongoose.connect(process.env.MONGO_URL, {
