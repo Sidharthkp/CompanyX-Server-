@@ -14,7 +14,7 @@ const handleErrors = (err) => {
 
     if (err.message === "Incorrect Email") errors.email = "That email is not registered"
 
-    if (err.message === "Incorrect Password") errors.email = "That password is incorrect"
+    if (err.message === "Incorrect Password") errors.password = "That password is incorrect"
 
     if (err.code === 11000) {
         errors.email = "Email is already registered";
@@ -62,20 +62,10 @@ module.exports.login = async (req, res, next) => {
                             roles: "admin"
                         }
                     })
-                    const token = createToken(user._id);
-
-                    res.cookie("jwt", token, {
-                        withCredentials: true,
-                        httpOnly: false,
-                        maxAge: maxAge * 1000,
-                    });
-                    res.status(201).json({ user: user._id, role: user.roles, created: true })
-                } else {
-                    if (user.roles != "admin") {
-                        let errMessage = "You dont have permission to access the admin account"
+                    if (!user.access) {
+                        let errMessage = "Admin has blocked you"
                         res.json({ errMessage, created: false });
                     } else {
-
                         const token = createToken(user._id);
 
                         res.cookie("jwt", token, {
@@ -84,6 +74,26 @@ module.exports.login = async (req, res, next) => {
                             maxAge: maxAge * 1000,
                         });
                         res.status(201).json({ user: user._id, role: user.roles, created: true })
+                    }
+                } else {
+                    if (user.roles != "admin") {
+                        let errMessage = "You dont have permission to access the admin account"
+                        res.json({ errMessage, created: false });
+                    } else {
+
+                        if (!user.access) {
+                            let errMessage = "Admin has blocked you"
+                            res.json({ errMessage, created: false });
+                        } else {
+                            const token = createToken(user._id);
+
+                            res.cookie("jwt", token, {
+                                withCredentials: true,
+                                httpOnly: false,
+                                maxAge: maxAge * 1000,
+                            });
+                            res.status(201).json({ user: user._id, role: user.roles, created: true })
+                        }
                     }
                 }
             } else if (secretCode === process.env.HR_CODE) {
@@ -94,20 +104,10 @@ module.exports.login = async (req, res, next) => {
                             roles: "hr"
                         }
                     })
-                    const token = createToken(user._id);
-
-                    res.cookie("jwt", token, {
-                        withCredentials: true,
-                        httpOnly: false,
-                        maxAge: maxAge * 1000,
-                    });
-                    res.status(201).json({ user: user._id, role: user.roles, created: true })
-                } else {
-                    if (user.roles != "hr") {
-                        let errMessage = "You dont have permission to access the HR account"
+                    if (!user.access) {
+                        let errMessage = "Admin has blocked you"
                         res.json({ errMessage, created: false });
                     } else {
-
                         const token = createToken(user._id);
 
                         res.cookie("jwt", token, {
@@ -116,6 +116,26 @@ module.exports.login = async (req, res, next) => {
                             maxAge: maxAge * 1000,
                         });
                         res.status(201).json({ user: user._id, role: user.roles, created: true })
+                    }
+                } else {
+                    if (user.roles != "hr") {
+                        let errMessage = "You dont have permission to access the HR account"
+                        res.json({ errMessage, created: false });
+                    } else {
+
+                        if (!user.access) {
+                            let errMessage = "Admin has blocked you"
+                            res.json({ errMessage, created: false });
+                        } else {
+                            const token = createToken(user._id);
+
+                            res.cookie("jwt", token, {
+                                withCredentials: true,
+                                httpOnly: false,
+                                maxAge: maxAge * 1000,
+                            });
+                            res.status(201).json({ user: user._id, role: user.roles, created: true })
+                        }
                     }
                 }
             } else {
@@ -126,14 +146,20 @@ module.exports.login = async (req, res, next) => {
             const check = await UserModel.findOne({ email })
             if (!check.roles) {
                 const user = await UserModel.login(email, password);
-                const token = createToken(user._id);
+                if (!user.access) {
+                    let errMessage = "Admin has blocked you"
+                    res.json({ errMessage, created: false });
+                } else {
+                    const token = createToken(user._id);
 
-                res.cookie("jwt", token, {
-                    withCredentials: true,
-                    httpOnly: false,
-                    maxAge: maxAge * 1000,
-                });
-                res.status(200).json({ user: user._id, created: true })
+                    res.cookie("jwt", token, {
+                        withCredentials: true,
+                        httpOnly: false,
+                        maxAge: maxAge * 1000,
+                    });
+                    res.status(200).json({ user: user._id, created: true })
+                }
+
             } else {
                 let errMessage = "Please login with HR/Admin login portal"
                 res.json({ errMessage, created: false });
@@ -144,3 +170,45 @@ module.exports.login = async (req, res, next) => {
         res.json({ errors, created: false });
     }
 };
+
+module.exports.google = async (req, res, next) => {
+    try {
+        const user = await UserModel.findOne({ email: req.body.email })
+        if (user) {
+            if (!user.access) {
+                let errMessage = "Admin has blocked you"
+                res.json({ errMessage, created: false });
+            } else {
+                const token = createToken(user._id);
+
+                res.cookie("jwt", token, {
+                    withCredentials: true,
+                    httpOnly: false,
+                    maxAge: maxAge * 1000,
+                });
+                res.status(200).json({ user: user._id, created: true })
+            }
+        } else {
+            const user = new UserModel({
+                email: req.body.email
+            })
+
+            user.save().then(() => {
+                const token = createToken(user._id);
+
+                res.cookie("jwt", token, {
+                    withCredentials: true,
+                    httpOnly: false,
+                    maxAge: maxAge * 1000,
+                });
+                res.status(201).json({ user: user._id, created: true })
+            }).catch((err) => {
+                const errors = handleErrors(err);
+                res.json({ errors, created: false });
+            })
+        }
+    } catch (err) {
+        const errors = handleErrors(err);
+        res.json({ errors, created: false });
+    }
+}
