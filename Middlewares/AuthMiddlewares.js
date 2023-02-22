@@ -16,7 +16,7 @@ module.exports.checkUser = (req, res, next) => {
             }
         })
     } else {
-        req.json({ status: false });
+        res.json({ status: false });
         next()
     }
 }
