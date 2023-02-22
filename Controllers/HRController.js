@@ -20,7 +20,6 @@ module.exports.userDetails = async (req, res) => {
 
 module.exports.userSalarySet = async (req, res) => {
     try {
-        console.log(req.body);
         await UserModel.findByIdAndUpdate(req.body.id, {
             $push: {
                 salaryStructure: {
