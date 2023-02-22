@@ -105,3 +105,16 @@ module.exports.getSalaryDetails = async (req, res) => {
         res.json({ errMessage: err.message });
     }
 }
+
+module.exports.accessControll = async (req, res) => {
+    try {
+        const user = await UserModel.findById(req.body.id)
+        await UserModel.findByIdAndUpdate(req.body.id, {
+            $set: {
+                access: !user.access
+            }
+        }).then((data) => res.status(201).json(data)).catch(err => res.json(err))
+    } catch (err) {
+        res.json({ errMessage: err.message });
+    }
+}

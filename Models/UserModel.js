@@ -47,7 +47,11 @@ const userSchema = new mongoose.Schema({
                 type: Date
             }
         },
-    ]
+    ],
+    access: {
+        type: Boolean,
+        default: true
+    }
 });
 
 userSchema.pre("save", async function (next) {
