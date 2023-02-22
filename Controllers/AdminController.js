@@ -5,6 +5,7 @@ const fs = require("fs");
 const url = require("url");
 
 const path = require("path");
+const UserModel = require("../Models/UserModel");
 
 module.exports.image = async (req, res) => {
 
@@ -57,25 +58,50 @@ module.exports.image = async (req, res) => {
 }
 
 module.exports.postBanner = async (req, res) => {
-    try{
-        new BannerModel({image: req.file.path}).save().then((data) => res.status(201).json(data)).catch(err => res.json(err))
+    try {
+        new BannerModel({ image: req.file.path }).save().then((data) => res.status(201).json(data)).catch(err => res.json(err))
     } catch (err) {
         res.json({ errMessage: err.message });
     }
 }
 
-module.exports.getBanner = async (req,res) => {
-    try{
+module.exports.getBanner = async (req, res) => {
+    try {
         await BannerModel.find().then((data) => res.status(201).json(data)).catch(err => res.json(err))
-    }catch (err) {
-        res.json({errMessage: err.message});
+    } catch (err) {
+        res.json({ errMessage: err.message });
     }
 }
 
-module.exports.deleteBanner = async (req,res) => {
-    try{
-        await BannerModel.findByIdAndRemove(req.body.id).then(() => res.status(201).json({data: "Deleted"})).catch(err => res.json(err))
-    }catch (err) {
-        res.json({errMessage: err.message});
+module.exports.deleteBanner = async (req, res) => {
+    try {
+        await BannerModel.findByIdAndRemove(req.body.id).then(() => res.status(201).json({ data: "Deleted" })).catch(err => res.json(err))
+    } catch (err) {
+        res.json({ errMessage: err.message });
+    }
+}
+
+module.exports.getSalaryDetails = async (req, res) => {
+    try {
+        let basic = []
+        let insurance = []
+        let CTC = []
+        let timeStamps = []
+        let employee = []
+        const users = await UserModel.find();
+        users.map((user) => {
+            user.salaryStructure?.map((slip) => {
+                basic.push(slip.basic);
+                insurance.push(slip.insurance);
+                CTC.push(slip.CTC);
+                let date = slip.timeStamps.setDate(slip.timeStamps.getDate())
+                let ts = new Date(date).toISOString().split('T')[0]
+                timeStamps.push(ts);
+                employee.push(user.email);
+            })
+        });
+        res.status(201).json({ basic, insurance, CTC, timeStamps, employee })
+    } catch (err) {
+        res.json({ errMessage: err.message });
     }
 }
