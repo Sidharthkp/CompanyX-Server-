@@ -20,6 +20,7 @@ module.exports.userDetails = async (req, res) => {
 
 module.exports.userSalarySet = async (req, res) => {
     try {
+        console.log(req.body);
         await UserModel.findByIdAndUpdate(req.body.id, {
             $push: {
                 salaryStructure: {
@@ -35,7 +36,7 @@ module.exports.userSalarySet = async (req, res) => {
                     timeStamps: new Date()
                 }
             }
-        })
+        }).then((data) => res.status(201).json(data)).catch(err => res.json(err))
     } catch (err) {
         res.json({ errMessage: err.message });
     }
