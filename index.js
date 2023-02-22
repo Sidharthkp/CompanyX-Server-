@@ -23,7 +23,7 @@ mongoose.connect(process.env.MONGO_URL, {
     }).catch(error => console.log(error.message));
 
 app.use(cors({
-    origin: ["http://localhost:5173"],
+    origin: ["https://companyxweb.netlify.app"],
     method: ["GET", "POST"],
     credentials: true
 }))
