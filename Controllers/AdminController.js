@@ -90,7 +90,7 @@ module.exports.getSalaryDetails = async (req, res) => {
         let employee = []
         const users = await UserModel.find();
         users.map((user) => {
-            user.salaryStructure?.map((slip) => {
+            user.salaryStructure.map((slip) => {
                 basic.push(slip.basic);
                 insurance.push(slip.insurance);
                 CTC.push(slip.CTC);
