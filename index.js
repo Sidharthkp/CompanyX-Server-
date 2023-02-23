@@ -9,24 +9,37 @@ const app = express();
 const mongoose = require("mongoose")
 const cookieParser = require("cookie-parser")
 
-const PORT = process.env.PORT || 4111;
-
-app.listen(PORT, console.log("Server has started"))
-
-mongoose.set('strictQuery', true);
-mongoose.connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-    .then(() => {
-        console.log("DB Connected Successfully");
-    }).catch(error => console.log(error.message));
+const server = http.createServer(app)
 
 app.use(cors({
     origin: ["http://companyxweb.netlify.app"],
     method: ["GET", "POST"],
     credentials: true
 }))
+mongoose
+    .connect(config.MONGO_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => {
+        mongoose.set("strictQuery", false);
+
+        const db = mongoose.connection;
+
+        db.on("connected", function () {
+            console.log("Success: MongDB Connected");
+        });
+        db.on(
+            "error",
+            console.error.bind(console, "Error: MongoDB connection error:")
+        );
+    })
+    .then(() =>
+        server.listen(config.PORT, () => {
+            console.log(`App listening on PORT ${config.PORT}`);
+        })
+    );
+
 
 app.use(cookieParser())
 app.use(express.json());
