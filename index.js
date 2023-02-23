@@ -12,10 +12,11 @@ const cookieParser = require("cookie-parser")
 const server = http.createServer(app)
 
 app.use(cors({
-    origin: ["http://companyxweb.netlify.app"],
+    origin: ["https://companyxweb.netlify.app"],
     method: ["GET", "POST"],
     credentials: true
 }))
+
 mongoose
     .connect(config.MONGO_URL, {
         useNewUrlParser: true,
