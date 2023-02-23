@@ -12,6 +12,8 @@ const http = require("http");
 
 const server = http.createServer(app)
 
+const PORT = process.env.PORT || 4111;
+
 app.use(cors({
     origin: ["https://companyxweb.netlify.app"],
     method: ["GET", "POST"],
@@ -19,7 +21,7 @@ app.use(cors({
 }))
 
 mongoose
-    .connect(config.MONGO_URL, {
+    .connect(process.env.MONGO_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
@@ -37,8 +39,8 @@ mongoose
         );
     })
     .then(() =>
-        server.listen(config.PORT, () => {
-            console.log(`App listening on PORT ${config.PORT}`);
+        server.listen(PORT, () => {
+            console.log(`App listening on PORT ${PORT}`);
         })
     );
 
