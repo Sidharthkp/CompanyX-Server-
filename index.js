@@ -26,7 +26,7 @@ mongoose
         useUnifiedTopology: true,
     })
     .then(() => {
-        mongoose.set("strictQuery", false);
+        mongoose.set("strictQuery", true);
 
         const db = mongoose.connection;
 
