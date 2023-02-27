@@ -171,44 +171,44 @@ module.exports.login = async (req, res, next) => {
     }
 };
 
-module.exports.google = async (req, res, next) => {
-    try {
-        const user = await UserModel.findOne({ email: req.body.email })
-        if (user) {
-            if (!user.access) {
-                let errMessage = "Admin has blocked you"
-                res.json({ errMessage, created: false });
-            } else {
-                const token = createToken(user._id);
+// module.exports.google = async (req, res, next) => {
+//     try {
+//         const user = await UserModel.findOne({ email: req.body.email })
+//         if (user) {
+//             if (!user.access) {
+//                 let errMessage = "Admin has blocked you"
+//                 res.json({ errMessage, created: false });
+//             } else {
+//                 const token = createToken(user._id);
 
-                res.cookie("jwt", token, {
-                    withCredentials: true,
-                    httpOnly: false,
-                    maxAge: maxAge * 1000,
-                });
-                res.status(200).json({ user: user._id, created: true })
-            }
-        } else {
-            const user = new UserModel({
-                email: req.body.email
-            })
+//                 res.cookie("jwt", token, {
+//                     withCredentials: true,
+//                     httpOnly: false,
+//                     maxAge: maxAge * 1000,
+//                 });
+//                 res.status(200).json({ user: user._id, created: true })
+//             }
+//         } else {
+//             const user = new UserModel({
+//                 email: req.body.email
+//             })
 
-            user.save().then(() => {
-                const token = createToken(user._id);
+//             user.save().then(() => {
+//                 const token = createToken(user._id);
 
-                res.cookie("jwt", token, {
-                    withCredentials: true,
-                    httpOnly: false,
-                    maxAge: maxAge * 1000,
-                });
-                res.status(201).json({ user: user._id, created: true })
-            }).catch((err) => {
-                const errors = handleErrors(err);
-                res.json({ errors, created: false });
-            })
-        }
-    } catch (err) {
-        const errors = handleErrors(err);
-        res.json({ errors, created: false });
-    }
-}
+//                 res.cookie("jwt", token, {
+//                     withCredentials: true,
+//                     httpOnly: false,
+//                     maxAge: maxAge * 1000,
+//                 });
+//                 res.status(201).json({ user: user._id, created: true })
+//             }).catch((err) => {
+//                 const errors = handleErrors(err);
+//                 res.json({ errors, created: false });
+//             })
+//         }
+//     } catch (err) {
+//         const errors = handleErrors(err);
+//         res.json({ errors, created: false });
+//     }
+// }
