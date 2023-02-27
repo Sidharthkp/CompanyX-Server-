@@ -212,3 +212,15 @@ module.exports.login = async (req, res, next) => {
 //         res.json({ errors, created: false });
 //     }
 // }
+
+module.exports.checkRole = async (req, res) => {
+    try {
+        const user = await UserModel.findOne({ email: req.body.email });
+        if (user) res.json({ status: true, email: user.email, role: user.roles })
+        else res.json({ status: false });
+    }
+    catch (err) {
+        const errors = handleErrors(err);
+        res.json({ errors, created: false });
+    }
+}
