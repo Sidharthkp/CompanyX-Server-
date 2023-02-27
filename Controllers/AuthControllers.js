@@ -1,13 +1,13 @@
 const UserModel = require("../Models/UserModel");
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 
 const maxAge = 3 * 24 * 60 * 60;
 
-const createToken = (id) => {
-    return jwt.sign({ id }, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: maxAge
-    });
-}
+// const createToken = (id) => {
+//     return jwt.sign({ id }, process.env.ACCESS_TOKEN_SECRET, {
+//         expiresIn: maxAge
+//     });
+// }
 
 const handleErrors = (err) => {
     let errors = { email: "", password: "" };
@@ -35,11 +35,11 @@ module.exports.register = async (req, res, next) => {
         const user = await UserModel.create({ email, password });
         const token = createToken(user._id);
 
-        res.cookie("jwt", token, {
-            withCredentials: true,
-            httpOnly: false,
-            maxAge: maxAge * 1000,
-        });
+        // res.cookie("jwt", token, {
+        //     withCredentials: true,
+        //     httpOnly: false,
+        //     maxAge: maxAge * 1000,
+        // });
         res.status(201).json({ user: user._id, created: true })
     } catch (err) {
         const errors = handleErrors(err);
@@ -66,13 +66,13 @@ module.exports.login = async (req, res, next) => {
                         let errMessage = "Admin has blocked you"
                         res.json({ errMessage, created: false });
                     } else {
-                        const token = createToken(user._id);
+                        // const token = createToken(user._id);
 
-                        res.cookie("jwt", token, {
-                            withCredentials: true,
-                            httpOnly: false,
-                            maxAge: maxAge * 1000,
-                        });
+                        // res.cookie("jwt", token, {
+                        //     withCredentials: true,
+                        //     httpOnly: false,
+                        //     maxAge: maxAge * 1000,
+                        // });
                         res.status(201).json({ user: user._id, role: user.roles, created: true })
                     }
                 } else {
@@ -85,13 +85,13 @@ module.exports.login = async (req, res, next) => {
                             let errMessage = "Admin has blocked you"
                             res.json({ errMessage, created: false });
                         } else {
-                            const token = createToken(user._id);
+                            // const token = createToken(user._id);
 
-                            res.cookie("jwt", token, {
-                                withCredentials: true,
-                                httpOnly: false,
-                                maxAge: maxAge * 1000,
-                            });
+                            // res.cookie("jwt", token, {
+                            //     withCredentials: true,
+                            //     httpOnly: false,
+                            //     maxAge: maxAge * 1000,
+                            // });
                             res.status(201).json({ user: user._id, role: user.roles, created: true })
                         }
                     }
@@ -108,13 +108,13 @@ module.exports.login = async (req, res, next) => {
                         let errMessage = "Admin has blocked you"
                         res.json({ errMessage, created: false });
                     } else {
-                        const token = createToken(user._id);
+                        // const token = createToken(user._id);
 
-                        res.cookie("jwt", token, {
-                            withCredentials: true,
-                            httpOnly: false,
-                            maxAge: maxAge * 1000,
-                        });
+                        // res.cookie("jwt", token, {
+                        //     withCredentials: true,
+                        //     httpOnly: false,
+                        //     maxAge: maxAge * 1000,
+                        // });
                         res.status(201).json({ user: user._id, role: user.roles, created: true })
                     }
                 } else {
@@ -127,13 +127,13 @@ module.exports.login = async (req, res, next) => {
                             let errMessage = "Admin has blocked you"
                             res.json({ errMessage, created: false });
                         } else {
-                            const token = createToken(user._id);
+                            // const token = createToken(user._id);
 
-                            res.cookie("jwt", token, {
-                                withCredentials: true,
-                                httpOnly: false,
-                                maxAge: maxAge * 1000,
-                            });
+                            // res.cookie("jwt", token, {
+                            //     withCredentials: true,
+                            //     httpOnly: false,
+                            //     maxAge: maxAge * 1000,
+                            // });
                             res.status(201).json({ user: user._id, role: user.roles, created: true })
                         }
                     }
@@ -150,13 +150,13 @@ module.exports.login = async (req, res, next) => {
                     let errMessage = "Admin has blocked you"
                     res.json({ errMessage, created: false });
                 } else {
-                    const token = createToken(user._id);
+                    // const token = createToken(user._id);
 
-                    res.cookie("jwt", token, {
-                        withCredentials: true,
-                        httpOnly: false,
-                        maxAge: maxAge * 1000,
-                    });
+                    // res.cookie("jwt", token, {
+                    //     withCredentials: true,
+                    //     httpOnly: false,
+                    //     maxAge: maxAge * 1000,
+                    // });
                     res.status(200).json({ user: user._id, created: true })
                 }
 
