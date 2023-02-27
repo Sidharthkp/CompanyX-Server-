@@ -73,7 +73,7 @@ module.exports.login = async (req, res, next) => {
                         //     httpOnly: false,
                         //     maxAge: maxAge * 1000,
                         // });
-                        res.status(201).json({ user: user._id, role: user.roles, created: true })
+                        res.status(201).json({ user: user._id, role: user.roles, created: true, email: user.email })
                     }
                 } else {
                     if (user.roles != "admin") {
@@ -92,7 +92,7 @@ module.exports.login = async (req, res, next) => {
                             //     httpOnly: false,
                             //     maxAge: maxAge * 1000,
                             // });
-                            res.status(201).json({ user: user._id, role: user.roles, created: true })
+                            res.status(201).json({ user: user._id, role: user.roles, created: true, email: user.email })
                         }
                     }
                 }
@@ -115,7 +115,7 @@ module.exports.login = async (req, res, next) => {
                         //     httpOnly: false,
                         //     maxAge: maxAge * 1000,
                         // });
-                        res.status(201).json({ user: user._id, role: user.roles, created: true })
+                        res.status(201).json({ user: user._id, role: user.roles, created: true, email: user.email })
                     }
                 } else {
                     if (user.roles != "hr") {
@@ -134,7 +134,7 @@ module.exports.login = async (req, res, next) => {
                             //     httpOnly: false,
                             //     maxAge: maxAge * 1000,
                             // });
-                            res.status(201).json({ user: user._id, role: user.roles, created: true })
+                            res.status(201).json({ user: user._id, role: user.roles, created: true, email: user.email })
                         }
                     }
                 }
@@ -157,7 +157,7 @@ module.exports.login = async (req, res, next) => {
                     //     httpOnly: false,
                     //     maxAge: maxAge * 1000,
                     // });
-                    res.status(200).json({ user: user._id, created: true })
+                    res.status(200).json({ user: user._id, created: true, email: user.email })
                 }
 
             } else {
