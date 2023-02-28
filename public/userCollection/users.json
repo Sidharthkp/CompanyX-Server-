@@ -1,0 +1,389 @@
+[{
+  "_id": {
+    "$oid": "63f3b8a8c4ef32ea9b001cc3"
+  },
+  "email": "admin@gmail.com",
+  "password": "$2b$10$XXBd2xCMka1E7nZpfoacb.rLOhTxzaiSE0frotxfRHIRkGdcD6xlu",
+  "__v": 0,
+  "roles": "admin",
+  "access": true
+},{
+  "_id": {
+    "$oid": "63f457438c53fb27e71b59a6"
+  },
+  "email": "hr@gmail.com",
+  "password": "$2b$10$jSwYXwHqdQ27dgSgM1mTHeRgXBMpwo/szf2bv4ZhW6JV/Z0n3ufka",
+  "__v": 0,
+  "roles": "hr",
+  "access": true
+},{
+  "_id": {
+    "$oid": "63f4bcccc44ee51885845447"
+  },
+  "email": "ironman@gmail.com",
+  "password": "$2b$10$S69uXCAA5ICKDyxn3c0PCuj01zN..nXNzOy7bLOZj/kvXZSFBBXfy",
+  "salaryStructure": [
+    {
+      "basic": 60000,
+      "reimbursements": 893,
+      "fixedAllowance": 132,
+      "incomeTax": 1283,
+      "insurance": 133,
+      "overTime": 8,
+      "halfDay": 1,
+      "fullDay": 3,
+      "CTC": 12380,
+      "timeStamps": {
+        "$date": {
+          "$numberLong": "1677045992251"
+        }
+      },
+      "_id": {
+        "$oid": "63f5b0e8591343a1b2106893"
+      }
+    },
+    {
+      "basic": 123412,
+      "reimbursements": 893,
+      "fixedAllowance": 132,
+      "incomeTax": 1283,
+      "insurance": 133,
+      "overTime": 8,
+      "halfDay": 1,
+      "fullDay": 3,
+      "CTC": 12580,
+      "timeStamps": {
+        "$date": {
+          "$numberLong": "1677046367410"
+        }
+      },
+      "_id": {
+        "$oid": "63f5b25f9b454f47a9fd1cb2"
+      }
+    },
+    {
+      "basic": 0,
+      "reimbursements": 0,
+      "fixedAllowance": 0,
+      "incomeTax": null,
+      "insurance": 0,
+      "overTime": 0,
+      "halfDay": 0,
+      "fullDay": 0,
+      "CTC": 0,
+      "timeStamps": {
+        "$date": {
+          "$numberLong": "1677571949270"
+        }
+      },
+      "_id": {
+        "$oid": "63fdb76d52cdcdabc58ad411"
+      }
+    },
+    {
+      "basic": 0,
+      "reimbursements": 0,
+      "fixedAllowance": 0,
+      "incomeTax": null,
+      "insurance": 0,
+      "overTime": 0,
+      "halfDay": 0,
+      "fullDay": 0,
+      "CTC": null,
+      "timeStamps": {
+        "$date": {
+          "$numberLong": "1677571949808"
+        }
+      },
+      "_id": {
+        "$oid": "63fdb76d52cdcdabc58ad421"
+      }
+    },
+    {
+      "basic": 0,
+      "reimbursements": 0,
+      "fixedAllowance": 0,
+      "incomeTax": null,
+      "insurance": 0,
+      "overTime": 0,
+      "halfDay": 0,
+      "fullDay": 0,
+      "CTC": null,
+      "timeStamps": {
+        "$date": {
+          "$numberLong": "1677571950002"
+        }
+      },
+      "_id": {
+        "$oid": "63fdb76e52cdcdabc58ad428"
+      }
+    },
+    {
+      "basic": 0,
+      "reimbursements": 0,
+      "fixedAllowance": 0,
+      "incomeTax": null,
+      "insurance": 0,
+      "overTime": 0,
+      "halfDay": 0,
+      "fullDay": 0,
+      "CTC": null,
+      "timeStamps": {
+        "$date": {
+          "$numberLong": "1677571950162"
+        }
+      },
+      "_id": {
+        "$oid": "63fdb76e52cdcdabc58ad434"
+      }
+    },
+    {
+      "basic": 0,
+      "reimbursements": 0,
+      "fixedAllowance": 0,
+      "incomeTax": null,
+      "insurance": 0,
+      "overTime": 0,
+      "halfDay": 0,
+      "fullDay": 0,
+      "CTC": null,
+      "timeStamps": {
+        "$date": {
+          "$numberLong": "1677571950316"
+        }
+      },
+      "_id": {
+        "$oid": "63fdb76e52cdcdabc58ad43c"
+      }
+    }
+  ],
+  "__v": 0,
+  "access": true
+},{
+  "_id": {
+    "$oid": "63f5c955673b6fc49490c525"
+  },
+  "email": "wonder@gmail.com",
+  "password": "$2b$10$7jrWwlp7LSTO0K3beoENoeqt0lNHhKPwZjnVbEHHLTylHFw38kcy.",
+  "access": true,
+  "salaryStructure": [
+    {
+      "basic": 1839274,
+      "reimbursements": 1234,
+      "fixedAllowance": 1234,
+      "incomeTax": 123,
+      "insurance": 234,
+      "overTime": 21,
+      "halfDay": 2,
+      "fullDay": 2,
+      "CTC": 1231224,
+      "timeStamps": {
+        "$date": {
+          "$numberLong": "1677064287108"
+        }
+      },
+      "_id": {
+        "$oid": "63f5f85fa7868ab8b1658b11"
+      }
+    },
+    {
+      "basic": 10000,
+      "reimbursements": 5000,
+      "fixedAllowance": 2000,
+      "incomeTax": 0,
+      "insurance": 0,
+      "overTime": 0,
+      "halfDay": 0,
+      "fullDay": 0,
+      "CTC": 0,
+      "timeStamps": {
+        "$date": {
+          "$numberLong": "1677572023188"
+        }
+      },
+      "_id": {
+        "$oid": "63fdb7b752cdcdabc58ad9e3"
+      }
+    },
+    {
+      "basic": 10000,
+      "reimbursements": 5000,
+      "fixedAllowance": 2000,
+      "incomeTax": 0,
+      "insurance": 0,
+      "overTime": 0,
+      "halfDay": 0,
+      "fullDay": 0,
+      "CTC": 7050,
+      "timeStamps": {
+        "$date": {
+          "$numberLong": "1677572024392"
+        }
+      },
+      "_id": {
+        "$oid": "63fdb7b852cdcdabc58ad9e6"
+      }
+    },
+    {
+      "basic": 10000,
+      "reimbursements": 5000,
+      "fixedAllowance": 2000,
+      "incomeTax": 0,
+      "insurance": 0,
+      "overTime": 0,
+      "halfDay": 0,
+      "fullDay": 0,
+      "CTC": 7050,
+      "timeStamps": {
+        "$date": {
+          "$numberLong": "1677572024854"
+        }
+      },
+      "_id": {
+        "$oid": "63fdb7b852cdcdabc58ad9ea"
+      }
+    },
+    {
+      "basic": 10000,
+      "reimbursements": 5000,
+      "fixedAllowance": 2000,
+      "incomeTax": 0,
+      "insurance": 0,
+      "overTime": 0,
+      "halfDay": 0,
+      "fullDay": 0,
+      "CTC": 0,
+      "timeStamps": {
+        "$date": {
+          "$numberLong": "1677572199970"
+        }
+      },
+      "_id": {
+        "$oid": "63fdb86752cdcdabc58adf4a"
+      }
+    },
+    {
+      "basic": 10000,
+      "reimbursements": 5000,
+      "fixedAllowance": 2000,
+      "incomeTax": 0,
+      "insurance": 0,
+      "overTime": 0,
+      "halfDay": 0,
+      "fullDay": 0,
+      "CTC": 7050,
+      "timeStamps": {
+        "$date": {
+          "$numberLong": "1677572200560"
+        }
+      },
+      "_id": {
+        "$oid": "63fdb86852cdcdabc58adf50"
+      }
+    },
+    {
+      "basic": 10000,
+      "reimbursements": 5000,
+      "fixedAllowance": 2000,
+      "incomeTax": 0,
+      "insurance": 0,
+      "overTime": 0,
+      "halfDay": 0,
+      "fullDay": 0,
+      "CTC": 7050,
+      "timeStamps": {
+        "$date": {
+          "$numberLong": "1677572200945"
+        }
+      },
+      "_id": {
+        "$oid": "63fdb86852cdcdabc58adf57"
+      }
+    },
+    {
+      "basic": 10000,
+      "reimbursements": 5000,
+      "fixedAllowance": 2000,
+      "incomeTax": 0,
+      "insurance": 0,
+      "overTime": 0,
+      "halfDay": 0,
+      "fullDay": 0,
+      "CTC": 7050,
+      "timeStamps": {
+        "$date": {
+          "$numberLong": "1677572201096"
+        }
+      },
+      "_id": {
+        "$oid": "63fdb86952cdcdabc58adf59"
+      }
+    },
+    {
+      "basic": 0,
+      "reimbursements": 0,
+      "fixedAllowance": 0,
+      "incomeTax": 0,
+      "insurance": 0,
+      "overTime": 0,
+      "halfDay": 0,
+      "fullDay": 0,
+      "CTC": 0,
+      "timeStamps": {
+        "$date": {
+          "$numberLong": "1677572391306"
+        }
+      },
+      "_id": {
+        "$oid": "63fdb92752cdcdabc58ae021"
+      }
+    },
+    {
+      "basic": 565444,
+      "reimbursements": 3433,
+      "fixedAllowance": 434343,
+      "incomeTax": 0,
+      "insurance": 0,
+      "overTime": 0,
+      "halfDay": 0,
+      "fullDay": 0,
+      "CTC": 0,
+      "timeStamps": {
+        "$date": {
+          "$numberLong": "1677573282571"
+        }
+      },
+      "_id": {
+        "$oid": "63fdbca252cdcdabc58ae996"
+      }
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63f5d1597de715f2fb71ab80"
+  },
+  "email": "admin1@gmail.com",
+  "password": "$2b$10$M9U7FSHyBqHMxqvXRBOEOOyLPQbdxnnqtZA6KhgG3e8nIYBmak/HO",
+  "access": true,
+  "salaryStructure": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63f606440ef439f1c6b14a5e"
+  },
+  "email": "hai@gmail.com",
+  "password": "$2b$10$ExupYl6ySKBd4JWbBuEN.u/rXv6u5q6mMa./zmaBtUdruAU7iLVTq",
+  "access": true,
+  "salaryStructure": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63fb32c6aa1e65bcb34239e7"
+  },
+  "email": "sidharth@gmail.com",
+  "password": "$2b$10$hOUyN/O7w/ztZckBXJEvHOv3Ao3sa.OyZfwoygxQLPFUFSy3.r5w.",
+  "access": true,
+  "salaryStructure": [],
+  "__v": 0
+}]
