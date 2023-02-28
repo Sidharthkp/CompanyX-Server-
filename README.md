@@ -1,7 +1,5 @@
 # Server of CompanyX-
-This is the server side of project made by using the MERN stack - https://companyxweb.netlify.app
-Github repository of client side - https://github.com/Sidharthkp/CompanyX-Client-.git
-This project mainly concentrates on the three modules which is included - (Admin, Employee and HR). 
+This is the server-side of a project made using the MERN stack. The website can be accessed at https://companyxweb.netlify.app, and the client-side repository can be found at https://github.com/Sidharthkp/CompanyX-Client-.git. The project mainly focuses on three modules, which include Admin, Employee, and HR.
 
 ## Admin
 1. The Admins can view the Dashboard which handles all the datas infographically.
