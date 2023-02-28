@@ -49,122 +49,15 @@ module.exports.register = async (req, res, next) => {
 
 module.exports.login = async (req, res, next) => {
     try {
-        const { email, password, secretCode } = req.body;
-        if (secretCode) {
-            if (secretCode === "empty") {
-                let errMessage = "Secret key is mandatory"
-                res.json({ errMessage, created: false });
-            } else if (secretCode === process.env.ADMIN_CODE) {
-                const user = await UserModel.login(email, password);
-                if (!user.roles) {
-                    await UserModel.findOneAndUpdate({ email }, {
-                        $set: {
-                            roles: "admin"
-                        }
-                    })
-                    if (!user.access) {
-                        let errMessage = "Admin has blocked you"
-                        res.json({ errMessage, created: false });
-                    } else {
-                        // const token = createToken(user._id);
-
-                        // res.cookie("jwt", token, {
-                        //     withCredentials: true,
-                        //     httpOnly: false,
-                        //     maxAge: maxAge * 1000,
-                        // });
-                        res.status(201).json({ user: user._id, role: user.roles, created: true, email: user.email })
-                    }
-                } else {
-                    if (user.roles != "admin") {
-                        let errMessage = "You dont have permission to access the admin account"
-                        res.json({ errMessage, created: false });
-                    } else {
-
-                        if (!user.access) {
-                            let errMessage = "Admin has blocked you"
-                            res.json({ errMessage, created: false });
-                        } else {
-                            // const token = createToken(user._id);
-
-                            // res.cookie("jwt", token, {
-                            //     withCredentials: true,
-                            //     httpOnly: false,
-                            //     maxAge: maxAge * 1000,
-                            // });
-                            res.status(201).json({ user: user._id, role: user.roles, created: true, email: user.email })
-                        }
-                    }
-                }
-            } else if (secretCode === process.env.HR_CODE) {
-                const user = await UserModel.login(email, password);
-                if (!user.roles) {
-                    await UserModel.findOneAndUpdate({ email }, {
-                        $set: {
-                            roles: "hr"
-                        }
-                    })
-                    if (!user.access) {
-                        let errMessage = "Admin has blocked you"
-                        res.json({ errMessage, created: false });
-                    } else {
-                        // const token = createToken(user._id);
-
-                        // res.cookie("jwt", token, {
-                        //     withCredentials: true,
-                        //     httpOnly: false,
-                        //     maxAge: maxAge * 1000,
-                        // });
-                        res.status(201).json({ user: user._id, role: user.roles, created: true, email: user.email })
-                    }
-                } else {
-                    if (user.roles != "hr") {
-                        let errMessage = "You dont have permission to access the HR account"
-                        res.json({ errMessage, created: false });
-                    } else {
-
-                        if (!user.access) {
-                            let errMessage = "Admin has blocked you"
-                            res.json({ errMessage, created: false });
-                        } else {
-                            // const token = createToken(user._id);
-
-                            // res.cookie("jwt", token, {
-                            //     withCredentials: true,
-                            //     httpOnly: false,
-                            //     maxAge: maxAge * 1000,
-                            // });
-                            res.status(201).json({ user: user._id, role: user.roles, created: true, email: user.email })
-                        }
-                    }
-                }
-            } else {
-                let errMessage = "Wrong  secret code"
-                res.json({ errMessage, created: false });
-            }
+        const { email, password } = req.body;
+        const user = await UserModel.login(email, password);
+        if (!user.access) {
+            let errMessage = "Admin has blocked you"
+            res.json({ errMessage, created: false });
         } else {
-            const check = await UserModel.findOne({ email })
-            if (!check.roles) {
-                const user = await UserModel.login(email, password);
-                if (!user.access) {
-                    let errMessage = "Admin has blocked you"
-                    res.json({ errMessage, created: false });
-                } else {
-                    // const token = createToken(user._id);
-
-                    // res.cookie("jwt", token, {
-                    //     withCredentials: true,
-                    //     httpOnly: false,
-                    //     maxAge: maxAge * 1000,
-                    // });
-                    res.status(200).json({ user: user._id, created: true, email: user.email })
-                }
-
-            } else {
-                let errMessage = "Please login with HR/Admin login portal"
-                res.json({ errMessage, created: false });
-            }
+            res.status(200).json({ user: user._id, created: true, email: user.email })
         }
+
     } catch (err) {
         const errors = handleErrors(err);
         res.json({ errors, created: false });
