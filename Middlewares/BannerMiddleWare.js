@@ -23,10 +23,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage: storage,
-    limts: {
-        fileSize: 1024 * 1024 * 5,
-    },
-    fileFilter: fileFilter,
+    // limts: {
+    //     fileSize: 1024 * 1024 * 5,
+    // },
+    // fileFilter: fileFilter,
 });
 
 module.exports.single = upload.single("postImage");
