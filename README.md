@@ -24,7 +24,10 @@ To install and run this project, follow these steps:
 1. Clone this repository: `git clone https://github.com/Sidharthkp/CompanyX-Server-.git`
 2. Navigate to the project directory: `cd CompanyX-Server-`
 3. Install the dependencies: `npm install`
-4. Run the project: `npm run dev`
+4. Create a `.env` file in your root folder and create the key value pair for connection to the MongoDB database eg: `MONGO_URL: "mongodb+srv://: xyz.mongodb.net/?retryWrites=true&w=majority"`
+5. And provide some dummy datas for user login which holds the user details:
+   Create a collection named `user` and import the json file `users.json` which is provided inside the project directory `cd /public/userCollection`
+7. Run the project: `npm run dev`
 
 ## Contact
 
