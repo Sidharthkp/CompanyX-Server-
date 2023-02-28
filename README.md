@@ -4,16 +4,16 @@ Github repository of client side - https://github.com/Sidharthkp/CompanyX-Client
 This project mainly concentrates on the three modules which is included - (Admin, Employee and HR). 
 
 ## Admin
-1. The Admin can view the Dashboard which handles all the datas infographically.
-2. Admin can post the banner and delete the banner.
-3. Admin can block/unblock users who is loging in to the website.
-4. Admin can also view the salary details of the employees.
+1. The Admins can view the Dashboard which handles all the datas infographically.
+2. Admins can post the banner and delete the banner.
+3. Admins can block/unblock users who is loging in to the website.
+4. Admins can also view the salary details of the employees.
 
 ## HR
 1. HR is the one who generates salary slips to employees.
 2. HR can view all salaries provided to each employees.
 
-##Employee
+## Employee
 1. Employee can view and export the data (salary slip).
 2. All the salary slips can be accessed by just searching the date of salary issued in the search bar.
 
