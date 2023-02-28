@@ -15,7 +15,7 @@ const server = http.createServer(app)
 const PORT = process.env.PORT || 4111;
 
 app.use(cors({
-    origin: ["http://companyxweb.netlify.app"],
+    origin: ["https://companyxweb.netlify.app"],
     method: ["GET", "POST"],
     credentials: true
 }))
