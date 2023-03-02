@@ -40,3 +40,24 @@ module.exports.userSalarySet = async (req, res) => {
         res.json({ errMessage: err.message });
     }
 }
+
+module.exports.userSalaryEdit = async (req, res) => {
+    try {
+        await UserModel.findOneAndUpdate({_id: req.body.id, "salaryStructure._id": req.body.slip_id}, {
+            $set: {
+                "salaryStructure.$.basic": req.body.basic,
+                "salaryStructure.$.reimbursements": req.body.reimbursements,
+                "salaryStructure.$.fixedAllowance": req.body.fixedAllowance,
+                "salaryStructure.$.incomeTax": req.body.incomeTax,
+                "salaryStructure.$.insurance": req.body.insurance,
+                "salaryStructure.$.overTime": req.body.overTime,
+                "salaryStructure.$.halfDay": req.body.halfDay,
+                "salaryStructure.$.fullDay": req.body.fullDay,
+                "salaryStructure.$.CTC": req.body.CTC,
+                }
+            }
+        ).then((data) => res.status(201).json(data)).catch(err => res.json(err))
+    } catch (err) {
+        res.json({ errMessage: err.message });
+    }
+}
